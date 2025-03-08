@@ -4,9 +4,8 @@ import random
 
 def image_multiplier(img, n):
     variants = []
-    orig_width, orig_height = img.size
     
-    for i in range(n):
+    for _ in range(n):
         tmp = img.copy()
         
         # random rotation
@@ -14,9 +13,9 @@ def image_multiplier(img, n):
         tmp = tmp.rotate(angle, expand = True)
         
         # random brightness, contrast, and color
-        brightness = random.uniform(0.5, 1.5)
-        contrast = random.uniform(0.5, 1.5)
-        color = random.uniform(0.5, 1.5)
+        brightness = random.uniform(0.3, 2)
+        contrast = random.uniform(0.3, 2)
+        color = random.uniform(0.3, 2)
         tmp = ImageEnhance.Brightness(tmp).enhance(brightness)
         tmp = ImageEnhance.Contrast(tmp).enhance(contrast)
         tmp = ImageEnhance.Color(tmp).enhance(color)
@@ -37,7 +36,7 @@ def image_multiplier(img, n):
         #variants.append(tmp)
 
         # random zoom
-        scale = random.uniform(0.9, 1.1)
+        scale = random.uniform(0.3, 2)
         tmpsize = (int(tmp.width * scale), int(tmp.height * scale))
         tmp = tmp.resize(tmpsize, Image.BICUBIC)
 
@@ -49,5 +48,6 @@ from IPython.display import display
 
 img = Image.open('ISIC_9996602.jpg')
 test = image_multiplier(img, 5)
+display(img) # original image
 for i in range(5):
     display(test[i])
