@@ -21,9 +21,15 @@ def image_multiplier(img, n):
         tmp = ImageEnhance.Contrast(tmp).enhance(contrast)
         tmp = ImageEnhance.Color(tmp).enhance(color)
         
-        # random flip
-        if random.random() < 0.5:
+        # random orientation
+        c = random.choice(['none', 'mirror', 'flip', 'mirror_flip'])
+        if c == 'mirror':
             tmp = ImageOps.mirror(tmp)
+        elif c == 'flip':
+            tmp = ImageOps.flip(tmp)
+        elif c == 'mirror_flip':
+            tmp = ImageOps.mirror(tmp)
+            tmp = ImageOps.flip(tmp)
             
         # random shear 
         #shear = random.uniform(-0.5, 0.5)
